@@ -144,9 +144,7 @@ public class Test3 extends JFrame {
             }
         });
     }
-
-
-
+    
     public static void main(String[] args) {
         JFrame test = new Test3("S-AES加解密", 200, 300, 500, 300);
     }
