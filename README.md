@@ -32,7 +32,7 @@ S-AES算法实现
 将S-AES算法通过双重加密进行扩展，分组长度仍然是16 bits，但密钥长度为32 bits。  
 输入的16bits明文：1100111100010011  
 输入的32bits密钥：10100000111100111000111101110111  
-输出的16bits密文：1110111011011110  
+输出的16bits密文：111011101101111010001100  
 ![image](https://github.com/letMoonRunMyMood/S-AES/blob/main/images/Test4.1.png)
 
 #### 4.2 中间相遇攻击  
@@ -46,7 +46,7 @@ S-AES算法实现
 将S-AES算法通过三重加密进行扩展，下面两种模式选择一种完成：(1)按照32 bits密钥Key(K1+K2)的模式进行三重加密解密，(2)使用48bits(K1+K2+K3)的模式进行三重加解密。  
 输入的16bits明文：1100011101011100   
 输入的48bits密钥：10100000111100111000111101110111    
-输出的16bits密文：
+输出的16bits密文：01101111  
 ![image](https://github.com/letMoonRunMyMood/S-AES/blob/main/images/Test4.3.png)
 
 ### 第5关：工作模式  
