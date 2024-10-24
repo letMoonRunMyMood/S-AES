@@ -22,10 +22,8 @@ S-AES算法实现
 输入的明文：11ss  
 输入的密钥：1010000011110011  
 输出的密文：n:b   
-
 加密过程：  
 ![image](https://github.com/letMoonRunMyMood/S-AES/blob/main/images/Test3_Encyption.png)  
-
 解密过程：  
 ![image](https://github.com/letMoonRunMyMood/S-AES/blob/main/images/Test3_Decyption.png)
 
@@ -47,7 +45,8 @@ S-AES算法实现
 #### 4.3 三重加密  
 将S-AES算法通过三重加密进行扩展，下面两种模式选择一种完成：(1)按照32 bits密钥Key(K1+K2)的模式进行三重加密解密，(2)使用48bits(K1+K2+K3)的模式进行三重加解密。  
 输入的16bits明文：1100011101011100   
-输入的48bits密文：10100000111100111000111101110111    
+输入的48bits密钥：10100000111100111000111101110111    
+输出的16bits密文：
 ![image](https://github.com/letMoonRunMyMood/S-AES/blob/main/images/Test4.3.png)
 
 ### 第5关：工作模式  
