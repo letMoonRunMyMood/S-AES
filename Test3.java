@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.UnsupportedEncodingException;
 
 
 public class Test3 extends JFrame {
@@ -9,7 +10,7 @@ public class Test3 extends JFrame {
     JLabel label1;
     JLabel label2;
     JLabel label3;
-    JButton btn;
+    JButton btn1, btn2;
 
     //构造函数
     public Test3 (String s, int x, int y, int w, int h){
@@ -38,7 +39,7 @@ public class Test3 extends JFrame {
     //将两位String类型的字符转为二进制码的具体实现方法
     public static int[] stringtobinaryascii(String str) {
         int[] asciiValue =new int[str.length()];
-        int []output=new int[16];
+        int []output=new int[str.length()*8];
         String binaryAscii;
         for (int i = 0; i < str.length(); i++) {
             asciiValue[i] = str.charAt(i); // 获取字符的ASCII值
@@ -61,38 +62,90 @@ public class Test3 extends JFrame {
         label1=new JLabel("    输入明文对应的ASCLL码:");
         label2=new JLabel("    输入初始密钥:");
         label3=new JLabel("    输出密文:");
-        btn=new JButton("加密");
+        btn1=new JButton("加密");
+        btn2=new JButton("解密");
         add(label1);
         add(textfield1);
         add(label2);
         add(textfield2);
         add(label3);
         add(textfield3);
-        add(btn);
+        add(btn1);
+        add(btn2);
 
 
         //添加鼠标按钮事件
-        btn.addActionListener(new ActionListener() {
+        btn1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //获取文本框内容并转为数组
                 String input = textfield1.getText();
                 int[]input1=stringtobinaryascii(input);
+
                 String key = textfield2.getText();
-                int[]key1=stringtobinaryascii(key);
+                int[] inputKey = new int[key.length()];
+                for(int i=0; i < key.length();i++){
+                    try {
+                        inputKey[i] = key.getBytes("ASCII")[i] - '0';
+                    } catch (UnsupportedEncodingException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                }
                 Encryption encryption=new Encryption();
 
-                if(input.length()!=2||key.length()!=2){
-                    JOptionPane.showMessageDialog(null,"此ASCII扩展加密只能输入2位字符");
+                if(input.length()%2!=0){
+                    JOptionPane.showMessageDialog(null,"扩展加密的输入数据字符数量必须为偶数！");
+                    return;
+                }
+
+                if(inputKey.length!=16){
+                    JOptionPane.showMessageDialog(null,"扩展加密的密钥必须为16位");
                     return;
                 }
                 // 这里执行加密操作，
-                int[] encrypted = encryption.Encrypt(input1, key1);
+                int[] encrypted = encryption.Encrypt(input1, inputKey);
+                String output= binaryArrayToAscii(encrypted);
+                textfield3.setText(output);
+            }
+        });
+
+        //添加鼠标按钮事件
+        btn2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //获取文本框内容并转为数组
+                String input = textfield1.getText();
+                int[]input1=stringtobinaryascii(input);
+
+                String key = textfield2.getText();
+                int[] inputKey = new int[key.length()];
+                for(int i=0; i < key.length();i++){
+                    try {
+                        inputKey[i] = key.getBytes("ASCII")[i] - '0';
+                    } catch (UnsupportedEncodingException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                }
+                Encryption encryption=new Encryption();
+
+                if(input.length()%2!=0){
+                    JOptionPane.showMessageDialog(null,"扩展加密的输入数据字符数量必须为偶数！");
+                    return;
+                }
+
+                if(inputKey.length!=16){
+                    JOptionPane.showMessageDialog(null,"扩展加密的密钥必须为16位");
+                    return;
+                }
+                // 这里执行加密操作，
+                int[] encrypted = encryption.Decrypt(input1, inputKey);
                 String output= binaryArrayToAscii(encrypted);
                 textfield3.setText(output);
             }
         });
     }
+
+
 
     public static void main(String[] args) {
         JFrame test = new Test3("S-AES加解密", 200, 300, 500, 300);
