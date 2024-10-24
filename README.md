@@ -23,9 +23,9 @@ S-AES算法实现
 输入的密钥：1010000011110011
 输出的密文：n:b    
 加密过程：  
-![image](https://github.com/letMoonRunMyMood/S-AES/blob/main/images/Test3_Encryption.png)  
+![image](https://github.com/letMoonRunMyMood/S-AES/blob/main/images/Test3_Encyption.png)  
 解密过程：  
-![image](https://github.com/letMoonRunMyMood/S-AES/blob/main/images/Test3_Decryption.png)
+![image](https://github.com/letMoonRunMyMood/S-AES/blob/main/images/Test3_Decyption.png)
 
 第4关：多重加密  
 4.1 双重加密将S-AES算法通过双重加密进行扩展，分组长度仍然是16 bits，但密钥长度为32 bits。  
