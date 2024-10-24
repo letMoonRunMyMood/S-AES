@@ -176,35 +176,46 @@ public class Encryption extends KExpansion {
 
     //封装S-AES的两轮加密操作,输入为明文和初始密钥
     int[]Encrypt(int[]plaintext,int[]k){
-        int []plaintext1=Add_roundkey(plaintext,k);
+        int[] tmpTxt = new int[16];
+        int[] cipherTxt = new int[plaintext.length];
+        for(int n = 0;n < plaintext.length;n+=16) {
+            System.arraycopy(plaintext, n, tmpTxt, 0, tmpTxt.length);
+            int[] plaintext1 = Add_roundkey(tmpTxt, k);
 
-        Sub_byte(plaintext1);
-        Shift_row(plaintext1);
-        Mix_column(plaintext1);
-        int[]k1=produce_key(k,0);
-        int[]plaintext2=Add_roundkey(plaintext1,k1);
+            Sub_byte(plaintext1);
+            Shift_row(plaintext1);
+            Mix_column(plaintext1);
+            int[] k1 = produce_key(k, 0);
+            int[] plaintext2 = Add_roundkey(plaintext1, k1);
 
-        Sub_byte(plaintext2);
-        Shift_row(plaintext2);
-        int[]k2=produce_key(k1,1);
-        return Add_roundkey(plaintext2,k2);
-
+            Sub_byte(plaintext2);
+            Shift_row(plaintext2);
+            int[] k2 = produce_key(k1, 1);
+            int[] cipher=Add_roundkey(plaintext2, k2);
+            System.arraycopy(cipher,0,cipherTxt,n,16);
+        }
+        return cipherTxt;
     }
 
     //封装解密操作，输入密文和初始密钥
-    int[]Decrypt(int[]cryption,int[]k){
-        int[]k1=produce_key(k,0);
-        int[]k2=produce_key(k1,1);
+    int[]Decrypt(int[]cryption,int[]k) {
+        int[] k1 = produce_key(k, 0);
+        int[] k2 = produce_key(k1, 1);
+        int[] tmpTxt = new int[16];
+        int[] plaintext = new int[cryption.length];
+        for (int i = 0; i < cryption.length; i += 16) {
+            System.arraycopy(cryption, i, tmpTxt, 0, 16);
+            int[] cryption1 = Add_roundkey(tmpTxt, k2);
+            Shift_row(cryption1);
+            Sub_byte_1(cryption1);
+            int[] cryption2 = Add_roundkey(cryption1, k1);
+            Mix_column_1(cryption2);
 
-        int []cryption1=Add_roundkey(cryption,k2);
-        Shift_row(cryption1);
-        Sub_byte_1(cryption1);
-        int[]cryption2=Add_roundkey(cryption1,k1);
-        Mix_column_1(cryption2);
-
-        Shift_row(cryption2);
-        Sub_byte_1(cryption2);
-        return Add_roundkey(cryption2,k);
+            Shift_row(cryption2);
+            Sub_byte_1(cryption2);
+            int[] plainTxt = Add_roundkey(cryption2, k);
+            System.arraycopy(plainTxt, 0, plaintext, i, 16);
+        }
+        return plaintext;
     }
-
 }
