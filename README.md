@@ -28,7 +28,12 @@ S-AES算法实现
 ![image](https://github.com/letMoonRunMyMood/S-AES/blob/main/images/Test3_Decyption.png)
 
 第4关：多重加密  
-4.1 双重加密将S-AES算法通过双重加密进行扩展，分组长度仍然是16 bits，但密钥长度为32 bits。  
+4.1 双重加密  
+将S-AES算法通过双重加密进行扩展，分组长度仍然是16 bits，但密钥长度为32 bits。  
+输入的16bits明文：
+输入的32bits密钥：
+![image](https://github.com/letMoonRunMyMood/S-AES/blob/main/images/Test4.1.png)
+
 4.2 中间相遇攻击假设你找到了使用相同密钥的明、密文对(一个或多个)，请尝试使用中间相遇攻击的方法找到正确的密钥Key(K1+K2)。  
 4.3 三重加密将S-AES算法通过三重加密进行扩展，下面两种模式选择一种完成：(1)按照32 bits密钥Key(K1+K2)的模式进行三重加密解密，(2)使用48bits(K1+K2+K3)的模式进行三重加解密。
 
