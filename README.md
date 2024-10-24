@@ -10,7 +10,7 @@ S-AES算法实现
 输入的16bit密钥：1010000011110011  
 输出的16bit密文：1100111110011101  
 加密过程：  
-![image](https://github.com/letMoonRunMyMood/S-AES/blob/main/images/Test1_Encryption.png)
+![image](https://github.com/letMoonRunMyMood/S-AES/blob/main/images/Test1_Encryption.png)  
 解密过程：  
 ![image](https://github.com/letMoonRunMyMood/S-AES/blob/main/images/Test1_Decryption.png)
 
@@ -23,7 +23,7 @@ S-AES算法实现
 输入的密钥：1010000011110011
 输出的密文：n:b    
 加密过程：  
-![image](https://github.com/letMoonRunMyMood/S-AES/blob/main/images/Test1_Encryption.png)
+![image](https://github.com/letMoonRunMyMood/S-AES/blob/main/images/Test1_Encryption.png)  
 解密过程：  
 ![image](https://github.com/letMoonRunMyMood/S-AES/blob/main/images/Test1_Decryption.png)
 
