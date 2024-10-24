@@ -132,8 +132,9 @@ public class Test4 {
         int[]k1= Arrays.copyOfRange(key,0,16);
         int[]k2= Arrays.copyOfRange(key,16,32);
         int[]c1= e.Encrypt(plaintext,k1);
-        int[]c2=e.Encrypt(c1,k2);
-        System.out.print("三重加密后请16位密文为："+Arrays.toString(c2));
+        int[]c2= e.Encrypt(c1,k2);
+        int[]c3= e.Encrypt(c2,k1);
+        System.out.println("三重加密后的16位密文："+Arrays.toString(c3));
     }
 
 
